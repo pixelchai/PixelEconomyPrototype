@@ -29,6 +29,11 @@ function updateUI() {
 }
 
 function loadPalettes() {
+    // clear existing
+    paletteSelectElement.innerHTML = '';
+
+
+    // load combobox
     let palettes = pixelArtConfig["palettes"];
     let paletteKeys = Object.keys(palettes);
 
@@ -41,7 +46,7 @@ function loadPalettes() {
         paletteSelectElement.appendChild(optionElement);
     }
 
-    paletteElement.style.width = cWidth - paletteSelectElement.offsetWidth - 10 + "px";
+    paletteElement.style.width = cWidth - paletteSelectElement.offsetWidth - 5 + "px";
 }
 
 function loadPalette(paletteKey) {
@@ -54,5 +59,17 @@ function loadPalette(paletteKey) {
 
 (function () {
     window.addEventListener('resize', updateUI);
-    document.addEventListener("DOMContentLoaded", start);
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".sidebar-toggle")[0].addEventListener("click", function () {
+            let tickNo = 0;
+            let routineId = setInterval(function () {
+                updateUI();
+                if (tickNo > 10) {
+                    clearInterval(routineId);
+                }
+                tickNo++;
+            }, 100)
+        });
+        start();
+    });
 })();
