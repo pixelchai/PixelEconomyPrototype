@@ -23,12 +23,15 @@
     border: 1px solid rgba(0,0,0,0.5);
     border-radius: 5px;
     max-height: 40px;
-    display: inline-block;
     margin: 0;
     vertical-align: middle;
-    margin-right: .4rem;
+}
+
+.masthead-title img, .masthead-title .titleholder {
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .masthead-title * {
-    vertical-align: middle;
+    margin-right: .2rem;
 }
