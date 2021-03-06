@@ -46,7 +46,19 @@ function start() {
         mouseX = Math.floor((evt.clientX - rect.left) / division);
         mouseY = Math.floor((evt.clientY - rect.top) / division);
     });
+    paletteSelectElement.addEventListener('change', function () {
+        loadPalette(paletteSelectElement.value);
+    });
     updateUI();
+
+    // palette dropdown
+    loadPalettes();
+
+    // load first palette by default on first start
+    loadPalette(Object.keys(pixelArtConfig["palettes"])[0]);
+
+    // redraw
+    draw();
 }
 
 function updateUI() {
@@ -56,9 +68,6 @@ function updateUI() {
 
     cWidth = c.offsetWidth;
     cHeight = c.offsetHeight;
-
-    // palette dropdown
-    loadPalettes();
 
     // redraw
     draw();
@@ -72,6 +81,7 @@ function loadPalettes() {
     // load combobox
     let palettes = pixelArtConfig["palettes"];
     let paletteKeys = Object.keys(palettes);
+    // let paletteKeys = Object.keys(pixelArtConfig["palettes"])[0];
 
     for (let i = 0; i < paletteKeys.length; i++) {
         let paletteKey = paletteKeys[i];
@@ -86,10 +96,17 @@ function loadPalettes() {
 }
 
 function loadPalette(paletteKey) {
+    // clear palette element
+    paletteElement.innerHTML = "";
+
+    // add colour elements
     let colours = pixelArtConfig["palettes"][paletteKey];
 
     for (let i = 0; i < colours.length; i++) {
-
+        let colourElement = document.createElement("div");
+        colourElement.classList.add("palette-color");
+        colourElement.style.background = colours[i];
+        paletteElement.appendChild(colourElement);
     }
 }
 
