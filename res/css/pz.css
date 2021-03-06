@@ -7,3 +7,28 @@
     border-top: none;
 }
 
+.sidebar-title img {
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 5px;
+    max-width: 50%;
+}
+
+.sidebar-title h3 {
+    font-weight: normal;
+    color: #fff;
+    margin-top: .5rem;
+}
+
+.masthead-title img {
+    border: 1px solid rgba(0,0,0,0.5);
+    border-radius: 5px;
+    max-height: 40px;
+    display: inline-block;
+    margin: 0;
+    vertical-align: middle;
+    margin-right: .4rem;
+}
+
+.masthead-title * {
+    vertical-align: middle;
+}
