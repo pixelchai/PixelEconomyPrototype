@@ -1,4 +1,4 @@
-const COL_BAKGROUND = "#FFFFFF";
+const COL_BACKGROUND = "#FFFFFF";
 const COL_GRID = "#000000";
 const COL_BLACK = "#000000";
 const DIM = 16; // 16 x 16 pixel art
@@ -15,39 +15,61 @@ let mouseX = -1;
 let mouseY = -1;
 let curColour = COL_BLACK;
 
+let shouldDrawGrid = true;
+let pixels = [];
+let division = 10;
+
 function draw() {
     // background
-    ctx.fillStyle = COL_BAKGROUND;
-    ctx.rect(0, 0, cWidth, cHeight);
-    ctx.fill();
+    ctx.fillStyle = COL_BACKGROUND;
+    ctx.fillRect(0, 0, cWidth, cHeight);
+
+    // draw pixels
+    drawPixels();
 
     // draw grid
-    ctx.strokeStyle = COL_GRID;
-    ctx.setLineDash([1, 1]);
-    let division = cWidth / DIM;
-    for (let i = 0; i <= DIM; i++) {
-        // horizontal
-        ctx.beginPath();
-        ctx.moveTo(0, i * division);
-        ctx.lineTo(cWidth, i * division);
-        ctx.stroke();
+    if (shouldDrawGrid) {
+        ctx.strokeStyle = COL_GRID;
+        ctx.setLineDash([1, 1]);
+        division = cWidth / DIM;
+        for (let i = 0; i <= DIM; i++) {
+            // horizontal
+            ctx.beginPath();
+            ctx.moveTo(0, i * division);
+            ctx.lineTo(cWidth, i * division);
+            ctx.stroke();
 
-        // vertical
-        ctx.beginPath();
-        ctx.moveTo(i * division, 0);
-        ctx.lineTo(i * division, cHeight);
-        ctx.stroke();
+            // vertical
+            ctx.beginPath();
+            ctx.moveTo(i * division, 0);
+            ctx.lineTo(i * division, cHeight);
+            ctx.stroke();
+        }
+    }
+}
+
+function drawPixels() {
+    division = cWidth / DIM;
+    for (let y = 0; y < DIM; y++) {
+        let pixelRow = pixels[y];
+        for (let x = 0; x < DIM; x++) {
+            let pixel = pixelRow[x];
+            ctx.fillStyle = pixel;
+            ctx.fillRect(x * division, y * division, Math.ceil(division) + 1, Math.ceil(division) + 1);
+        }
     }
 }
 
 function start() {
+    initPixels();
     c.addEventListener('mousemove', function (evt) {
-        let division = cWidth / DIM;
+        division = cWidth / DIM;
         var rect = c.getBoundingClientRect();
 
         mouseX = Math.floor((evt.clientX - rect.left) / division);
         mouseY = Math.floor((evt.clientY - rect.top) / division);
     });
+    c.addEventListener('click', clickedCanvas);
     paletteSelectElement.addEventListener('change', function () {
         loadPalette(paletteSelectElement.value);
     });
@@ -64,6 +86,17 @@ function start() {
 
     // redraw
     draw();
+}
+
+function initPixels() {
+    for (let y = 0; y < DIM; y++) {
+        let pixelRow = [];
+        for (let x = 0; x < DIM; x++) {
+            // todo: might need to deep clone string (??)
+            pixelRow.push(COL_BACKGROUND);
+        }
+        pixels.push(pixelRow);
+    }
 }
 
 function updateUI() {
@@ -135,6 +168,11 @@ function loadPalette(paletteKey) {
 
         paletteElement.appendChild(colourElement);
     }
+}
+
+function clickedCanvas() {
+    pixels[mouseY][mouseX] = curColour;
+    draw();
 }
 
 (function () {
