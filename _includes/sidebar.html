@@ -9,7 +9,7 @@
 
     <div class="sidebar-item sidebar-title">
         <center>
-            <img src="res/img/logo-800.png">
+            <img src="/res/img/logo-800.png">
             <h3>PixelEconomy</h3>
         </center>
         <p>Virtual marketplace for creating, buying, and selling pixel art, made by <a
@@ -21,9 +21,16 @@
         <a class="sidebar-nav-item{% if page.title == 'Marketplace' %} active{% endif %}"
             href="{{ '/' | absolute_url }}">Marketplace</a>
 
+        <a class="sidebar-nav-item{% if page.title == 'Create' %} active{% endif %}"
+            href="{{ '/create' | absolute_url }}">Create</a>
 
-        <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a>
-        <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
+
+        <a class="sidebar-nav-item{% if page.title == 'About' %} active{% endif %}"
+            href="{{ '/about' | absolute_url }}">About</a>
+
+
+        <!-- <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a>
+        <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a> -->
         <span class="sidebar-nav-item">Currently v{{ site.version }}</span>
     </nav>
 

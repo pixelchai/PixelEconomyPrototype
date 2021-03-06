@@ -35,3 +35,30 @@
 .masthead-title * {
     margin-right: .2rem;
 }
+
+/* opening menu should compress the rest of the page */
+.sidebar, .sidebar-checkbox {
+    z-index: 10000;
+}
+
+#sidebar-checkbox:checked ~ .wrap {
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+          transition: transform .3s ease-in-out;
+          
+    transform: translateX(0) !important;
+    padding-left: 14rem !important;
+}
+
+#sidebar-checkbox:checked ~ .wrap .masthead {
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+          transition: transform .3s ease-in-out;
+
+    transform: translateX(0) !important;
+    /* padding-left: 4rem !important; */
+}
+
+@media (max-width: 1193px){
+    #sidebar-checkbox:checked ~ .wrap .masthead {
+        padding-left: 4rem !important;
+    }
+}

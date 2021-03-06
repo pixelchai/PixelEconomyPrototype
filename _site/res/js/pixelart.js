@@ -11,8 +11,8 @@ function start() {
     start();
 
     function resizeCanvas() {
-        c.width = window.innerWidth;
-        c.height = window.innerHeight;
+        // c.width = window.innerWidth;
+        // c.height = window.innerHeight;
 
         draw();
     }
