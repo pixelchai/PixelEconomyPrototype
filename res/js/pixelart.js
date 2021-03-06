@@ -11,8 +11,9 @@ function start() {
     start();
 
     function resizeCanvas() {
-        // c.width = window.innerWidth;
-        // c.height = window.innerHeight;
+        // c.width = c.offsetWidth;
+        c.height = c.offsetWidth;
+        c.style.height = c.offsetWidth + "px";
 
         draw();
     }

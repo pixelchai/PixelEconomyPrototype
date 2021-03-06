@@ -6,8 +6,22 @@ permalink: create
 
 <div class="pixelart">
     <canvas class="pixelart-canvas"></canvas>
-    <script>
-        let pixelArtConfig = { "palettes": [["#000000", "#FFFFFF"], ["#DDDDDD", "#AAAAAA", "#777777", "#555555", "#222222"], ["#F9FFB3", "#ABCC47", "#3D8026", "#1B2E3A", "#00131A"]] };
-    </script>
-    <script src="/res/js/pixelart.js"></script>
+    <div class="palette-select">
+        <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="opel">Opel</option>
+            <option value="audi">Audi</option>
+        </select>
+        <div class="palette">
+            <div class="palette-color" style="background: red;"></div>
+            <div class="palette-color" style="background: green;"></div>
+            <div class="palette-color" style="background: blue;"></div>
+            <div class="palette-color" style="background: black;"></div>
+        </div>
+    </div>
 </div>
+<script>
+    let pixelArtConfig = { "palettes": { "Basic": ["#000000", "#FFFFFF"], "Greyscale": ["#DDDDDD", "#AAAAAA", "#777777", "#555555", "#222222"], "Gameboy-like": ["#F9FFB3", "#ABCC47", "#3D8026", "#1B2E3A", "#00131A"] } };
+</script>
+<script src="/res/js/pixelart.js"></script>
