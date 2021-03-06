@@ -88,16 +88,16 @@
 }
 
 .palette-select select{
-    width: 18%;
+    /* width: 18%; */
 }
 
-.palette {
+.palette-select .palette {
     height: 20px;
     display: inline-flex;
-    width: 80%;
+    /* width: 80%; */
 }
 
-.palette .palette-color {
+.palette-select .palette .palette-color {
     display: inline-flex;
     flex-grow: 1;
 }
