@@ -111,3 +111,47 @@
     /* border-right: 40px solid rgba(255,255,255,0.0); */
     width: 40px;
 }
+
+/* pixel art meta */
+.pixelart .meta {
+    width:100%;
+    display: inline-flex;
+}
+.pixelart .meta span{
+    font-size:16px;
+}
+
+.pixelart .meta .title-input{
+    margin-right:.2rem;
+}
+
+.pixelart .meta * {
+    height: 22px;
+    flex-grow: 1;
+}
+
+/* grid */
+.grid {
+    text-align: center
+}
+
+.grid .gridbox {
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    max-width: 1152px
+}
+
+.grid .gridbox .grid-item {
+    float: left;
+    display: inline-block;
+    padding: 0;
+    text-align: left;
+    width: 100%
+}
+
+@media only screen and (min-width: 592px) {
+    .grid .gridbox .grid-item {
+        width:50%
+    }
+}
