@@ -1,5 +1,6 @@
 const COL_BAKGROUND = "#FFFFFF";
 const COL_GRID = "#000000";
+const COL_BLACK = "#000000";
 const DIM = 16; // 16 x 16 pixel art
 
 let c = document.querySelectorAll(".pixelart-canvas")[0];
@@ -12,6 +13,7 @@ let paletteElement = document.querySelectorAll(".palette-select .palette")[0];
 
 let mouseX = -1;
 let mouseY = -1;
+let curColour = COL_BLACK;
 
 function draw() {
     // background
@@ -57,6 +59,9 @@ function start() {
     // load first palette by default on first start
     loadPalette(Object.keys(pixelArtConfig["palettes"])[0]);
 
+    // on first start, select black
+    clickedPalette(paletteElement.children[1], COL_BLACK);
+
     // redraw
     draw();
 }
@@ -95,6 +100,19 @@ function loadPalettes() {
     paletteElement.style.width = cWidth - paletteSelectElement.offsetWidth - 5 + "px";
 }
 
+function clickedPalette(element, colour) {
+    // remove selected from other elements
+    let colourElements = paletteElement.children;
+    for (let i = 0; i < colourElements.length; i++) {
+        colourElements[i].classList.remove("selected")
+    }
+
+    // add selected to clicked element
+    element.classList.add("selected");
+
+    curColour = colour;
+}
+
 function loadPalette(paletteKey) {
     // clear palette element
     paletteElement.innerHTML = "";
@@ -103,9 +121,18 @@ function loadPalette(paletteKey) {
     let colours = pixelArtConfig["palettes"][paletteKey];
 
     for (let i = 0; i < colours.length; i++) {
+        let colour = colours[i];
         let colourElement = document.createElement("div");
         colourElement.classList.add("palette-color");
-        colourElement.style.background = colours[i];
+
+        if (curColour == colour) {
+            colourElement.classList.add("selected");
+        }
+
+        colourElement.style.background = colour;
+
+        colourElement.addEventListener("click", clickedPalette.bind(this, colourElement, colour));
+
         paletteElement.appendChild(colourElement);
     }
 }
